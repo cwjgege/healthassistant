@@ -6,7 +6,7 @@
         <el-row>
           <el-col :span="4">
             <div class="logo">
-              Health
+              Aivocado
             </div>
           </el-col>
           <el-col :span="14" class="PC">
@@ -70,7 +70,7 @@ export default {
       ],
       showMenu: false,
       headerActive: false,
-      GOOGLE_CLIENT_ID: "444330511045-3haa51jrb54qdov8qbtb5q5654kpb45k.apps.googleusercontent.com"
+      GOOGLE_CLIENT_ID: "42950959280-v3k7onnpje9prf59vv6h583mpodcnqvd.apps.googleusercontent.com"
     }
   },
   created() {
@@ -197,6 +197,7 @@ export default {
   font-size: 18px;
   line-height: 30px;
 }
+
 
 .turn:hover {
   color: #0f2420;

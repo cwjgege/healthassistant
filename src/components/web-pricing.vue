@@ -1,12 +1,20 @@
 <template>
   <div class="bg" id="pricing">
-    <div class="content">
+    <div class="content fadeIn">
       <div class="pricingTip">
         <div class="pricingContent one">
           <div class="bigTextColor">
             {{ title }}
           </div>
           <div class="smallTextColor" v-html="describe">
+
+          </div>
+          <div class="inputEmail">
+            <div class="smallTextColor">Email:</div>
+            <div class="_inputEmail">
+              <input type="text" v-model="email">
+              <button class="send" @click="submitEmail">Subscribe</button>
+            </div>
 
           </div>
         </div>
@@ -100,21 +108,90 @@
 </template>
 
 <script>
+import {submitUserEmail} from "@/api/index"
+import {ElMessage} from 'element-plus'
+
 export default {
-  name: "web-pricing",
+  name: "Preimum Price",
   data() {
     return {
       title: "Premium",
-      describe: "Free 7-day trial<br />" +
-                "Cancel anytime",
+      describe: "Upgrade to Premium for an ad-free experience with exclusive, powerful AI features. <br /><br/>Try it free for 7 days, and you can cancel anytime.",
+      email: ''
     }
   },
 
-  methods: {},
+  methods: {
+    submitEmail() {
+      console.log(this.email)
+      if (!this.matchEmail(this.email)) {
+        ElMessage({
+          message: "Email format does not match",
+          type: 'warning',
+        })
+        return;
+      }
+      submitUserEmail(this.email).then(res => {
+        console.log(res)
+        if (res.code == 0) {
+          ElMessage({
+            message: 'Submitted successfully',
+            type: 'success',
+          })
+        } else {
+          ElMessage({
+            message: res.msg,
+            type: 'warning',
+          })
+        }
+      })
+      this.email = ""
+    },
+    matchEmail(str) {
+      const regex = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+      return regex.test(str);
+    }
+  },
 }
 </script>
 
 <style scoped lang="less">
+._inputEmail {
+  margin-top: 10px;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  border: 1px solid #dadada;
+
+  input {
+    outline: none;
+    width: calc(100% - 120px);
+    height: 28px;
+    border: none;
+    padding: 0px 10px;
+  }
+
+  button {
+    width: 100px;
+    height: 32px;
+    position: relative;
+    top: -1px;
+    opacity: 1;
+    background: rgba(15, 36, 32, 1);
+    /** 文本1 */
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 30px;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    vertical-align: top;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+}
+
 .content {
   margin-top: 120px;
   margin-bottom: 120px;
@@ -197,6 +274,7 @@ export default {
     margin: 30px 30px 0px 30px;
     text-align: center;
     display: inline-block;
+    width: calc(100% - 60px);
 
     .one, .two, .three {
       margin: auto;
@@ -204,6 +282,43 @@ export default {
 
     .detailedCharges {
       font-size: 40px;
+    }
+  }
+
+  .pricingTip, .pricingFree, .pricingCharge {
+
+    width: 100% !important;
+    padding: 30px 0px !important;
+    min-width: 100px !important;
+
+  }
+
+  .showData {
+    margin-top: 30px !important;
+  }
+}
+
+@media (max-width: 340px) {
+  .pricingTip, .pricingFree, .pricingCharge {
+
+    .bigbigTextColor {
+      font-size: 20px;
+    }
+
+    .smallTextColor {
+      font-size: 10px;
+
+      span {
+        font-size: 10px;
+      }
+    }
+
+    .detailedCharges {
+      font-size: 20px;
+
+      span {
+        font-size: 10px;
+      }
     }
   }
 }

@@ -2,16 +2,19 @@
   <div class="bgColor">
     <div class="bg" id="demo">
       <div class="content" v-for="(item, i) in describes" :key="i">
-        <div class="imgContent" v-if="i%2==0">
+        <div class="imgContent animateLeft isPhone" v-if="i%2==0">
           <img :src="item.demoImage.src" alt="">
         </div>
         <div class="showtext">
-          <div class="describes" :style="{marginTop:i==1?'280px':''}">
+          <div class="describes" :class="i%2!=0?'animateLeft':'animateRight'" :style="{marginTop:i==1?'280px':''}">
             <div class=" bigTextColor">{{ item.title }}</div>
-            <div class=" smallTextColor">{{ item.describe }}</div>
+            <div class=" smallTextColor" v-html="item.describe"></div>
           </div>
         </div>
-        <div class="imgContent" v-if="i%2!=0">
+        <div class="imgContent animateLeft isNotPhone" v-if="i%2==0">
+          <img :src="item.demoImage.src" alt="">
+        </div>
+        <div class="imgContent animateRight" v-if="i%2!=0">
           <img :src="item.demoImage.src" alt="">
         </div>
       </div>
@@ -27,8 +30,8 @@ export default {
     return {
       describes: [{
         title: "Easiest Way to Track Meals",
-        describe: "Snap and grab it! \n" +
-                  "BodyCompass will provide a nutrition analysis and diet advice based on the photo. Make every meal a step towards your health goals",
+        describe: "Snap and grab it! <br />" +
+                  "Aivocado will provide a nutrition analysis and diet advice based on the photo. Make every meal a step towards your health goals",
         demoImage: {src: require("./../assets/function1.png")},
       }, {
         title: "Your Tailored Health Expert",
@@ -54,7 +57,6 @@ export default {
 .content {
   height: 100%;
   display: flex;
-
 
 
   .imgContent {
@@ -84,6 +86,10 @@ export default {
     margin-top: 200px;
   }
 
+}
+
+.isNotPhone {
+  display: none;
 }
 
 @media (max-width: 992px) {
@@ -130,6 +136,14 @@ export default {
     .smallTextColor {
       margin-top: 30px;
     }
+  }
+
+  .isPhone {
+    display: none;
+  }
+
+  .isNotPhone {
+    display: block;
   }
 }
 

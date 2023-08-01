@@ -1,15 +1,16 @@
 <template>
   <div class="bg" id="tryItNow">
     <div class="content">
-      <div class="tryContent">
+      <div class="tryContent fadeIn">
         <div class="tryLeft">
           <div class="tryLeftText">
             <div class="bigTextColor">{{ title }}</div>
             <div class="smallTextColor">{{ describe }}</div>
-            <div class="smallTextColor" style="font-weight: 600">{{ uploadTip }}</div>
+            <div class="smallTextColor" style="font-weight: 600;font-size: 20px">{{ uploadTip }}</div>
             <div class="examples">
-              <div v-for="(item,i) in examples" :key="i">
-                <img :src="item.src" alt="" @click="showExample(item)">
+              <div v-for="(item,i) in examples" :key="i" v-loading="i==exmpleIndex&&!istry"
+                   :element-loading-customClass="'loadingSvg'">
+                <img :src="item.src" alt="" @click="showExample(item,i)">
               </div>
             </div>
             <div class="uploadFiles">
@@ -20,10 +21,10 @@
                   :on-success="handleSuccess"
                   :show-file-list="false"
               >
-                <button class="uploadBtn" :class="!istry?'isBtnDisabled':''" :disabled="!istry"><span class="loading"
-                                                                                                      v-show="!istry"><el-icon
-                    class="_loading"><Loading/></el-icon></span>upload Photo
-                </button>
+                <!--                <button class="uploadBtn" :class="!istry?'isBtnDisabled':''" :disabled="!istry"><span class="loading"-->
+                <!--                                                                                                      v-show="!istry"><el-icon-->
+                <!--                    class="_loading"><Loading/></el-icon></span>Upload Photo-->
+                <!--                </button>-->
               </el-upload>
             </div>
           </div>
@@ -105,7 +106,7 @@ export default {
   data() {
     return {
       title: "Start From Today",
-      describe: "Upload your meal now! BodyCompass will provide you a nutrition analysis and diet advice.",
+      describe: "Upload your meal now! Aivocado will provide you with nutrition analysis and diet advice.",
       uploadTip: "Try with example images!",
       examples: [
         {
@@ -146,7 +147,7 @@ export default {
           src: require("./../assets/ex3.jpg"),
           name: "Salad",
           nutritionalComposition: [
-            {title: "Calories", total: 940},
+            {title: "Calories", total: 94},
             {title: "Carbs", total: 9, percentage: 0.03},
             {title: "Protein", total: 7, percentage: 0.14},
             {title: "Fat", total: 4.4, percentage: 0.06},
@@ -163,7 +164,7 @@ export default {
           src: require("./../assets/ex4.png"),
           name: "Steak",
           nutritionalComposition: [
-            {title: "Calories", total: 94},
+            {title: "Calories", total: 679},
             {title: "Carbs", total: 0, percentage: 0},
             {title: "Protein", total: 62, percentage: 0.24},
             {title: "Fat", total: 48, percentage: 0.2},
@@ -190,6 +191,7 @@ export default {
       advice: "",
       foodImageSrc: require("./../assets/ex1.jpg"),
       isMobileDevice: isMobileDevice(),
+      exmpleIndex: null,
 
     }
   },
@@ -230,15 +232,17 @@ export default {
           arr.push(`<li>${item}</li>`)
         }
       }
-      return "<ul>" + arr.join("") + "</ul>"
+      return "<ul style='padding-left: 20px'>" + arr.join("") + "</ul>"
     },
-    showExample(item) {
+    showExample(item, i) {
+
       if (this.istry) {
         this.istry = false
+        this.exmpleIndex = i
         setTimeout(() => {
           this.istry = true
           this.dialogVisible = true;
-        }, 5000)
+        }, 2000)
         this.nutritionalComposition = item.nutritionalComposition;
         this.foodImageSrc = item.src;
         this.overall_evaluation = item.overall_evaluation;
@@ -380,10 +384,16 @@ export default {
   }
 }
 
+.circular {
+  width: 30px !important;
+  height: 30px !important;
+}
+
 .examples {
   width: 100%;
   display: flex;
   margin-top: 30px;
+
 
   div {
     flex: 1;
@@ -395,12 +405,17 @@ export default {
       border-radius: 10px;
       cursor: pointer;
       transition: all 0.2s;
+      margin-top: 5%;
 
       &:hover {
         transform: scale(1.1);
         box-shadow: 55px 10px 50px rgba(0, 0, 0, 0.06);
       }
+
+
     }
+
+
   }
 }
 
@@ -493,9 +508,20 @@ export default {
   background: #ebf2e9;
   margin-bottom: 20px;
   border-radius: 10px;
+
 }
 
+
 @media (max-width: 992px) {
+  .showData {
+    margin-top: 30px;
+  }
+
+  .showImage {
+    width: 100% !important;
+    margin-right: 0px !important;
+  }
+
   .tryContent {
     display: inline-block;
 

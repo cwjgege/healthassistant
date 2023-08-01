@@ -6,18 +6,18 @@
           <span class="bigTextColor">{{ footerTitle }}</span>
           <div class="footerMain">
             <div class="footerRight">
-              <div class="footerBody smallTextColor">
-                {{ footerDes }}
+              <div class="footerBody smallTextColor" v-html="footerDes">
               </div>
-              <div class="footerBottom smallTextColor footerBody">
-                {{ footerBottom }}
+              <div class="footerBottom smallTextColor footerBody" v-html="footerBottom">
               </div>
 
             </div>
             <div class="footerLeft">
-              <div class="contactInformation bigTextColor" v-for="(item, i) in contactInformation" :key="i">{{
-                  item.title
-                }}
+              <div class="contactInformation bigTextColor" v-for="(item, i) in contactInformation" :key="i">
+                <a :href="item.src" style="color: white">{{
+                    item.title
+                  }}</a>
+
               </div>
             </div>
 
@@ -35,15 +35,20 @@ export default {
   name: "web-footer",
   data() {
     return {
-      footerTitle: 'Premium Features',
-      footerDes: 'Creating awesome mobile apps that help you reach your goals, create good habits, stay hydrated, focus and improve your life!',
-      footerBottom: "Check out our apps at: FunnMedia.com",
+      footerTitle: 'Contact Us',
+      footerDes: 'Feel free to contact us via <a href="mailto:dlboy1024@gmail.com" style="color: white">Email</a> if you have some feedback' +
+                 ' Twitter ' +
+                 'Instagram',
+      footerBottom: "",
       contactInformation: [{
-        title: "Instagram"
+        title: "Instagram",
+        src: ''
       }, {
-        title: "Twitter"
+        title: "Twitter",
+        src: 'https://twitter.com/AivocadoApp'
       }, {
-        title: "Facebook"
+        title: "Facebook",
+        src: ''
       }]
     }
   },
@@ -83,7 +88,6 @@ export default {
   vertical-align: top;
   margin-top: 20px;
   width: 80%;
-
 
 }
 

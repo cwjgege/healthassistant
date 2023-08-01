@@ -3,7 +3,7 @@
     <div class="bg" id="intro">
       <div class="content">
 
-        <div class="introContent">
+        <div class="introContent animateLeft">
           <div class="introTitle">
             <span class="bigTextColor">{{ title }}</span>
           </div>
@@ -12,7 +12,7 @@
           </div>
         </div>
 
-        <div class="imgContent">
+        <div class="imgContent animateRight">
           <img :src="describeImage" alt="">
         </div>
 
@@ -26,8 +26,8 @@ export default {
   name: "web-intro",
   data() {
     return {
-      title: "Get your health reports",
-      describe: "Get your health reports & AI personal dietian anytime",
+      title: "Your Smart & Tailored Health Tracker",
+      describe: "Easiest way to track your diet and health",
       describeImage: require("./../assets/home.png"),
     }
   },
@@ -41,16 +41,13 @@ export default {
   background: #CDE2C9;
 }
 
-.bigTextColor {
-  font-size: 67px !important;
-}
 
 .bg {
   margin-top: 90px;
   height: 500px;
 
   .introContent {
-    flex: 1;
+    flex: 4;
   }
 
 
@@ -64,8 +61,8 @@ export default {
     height: 190px;
     text-align: left;
     vertical-align: top;
-    padding-top: 160px;
-    width: 500px;
+    padding-top: 130px;
+    width: 600px;
 
     span {
 
@@ -76,6 +73,7 @@ export default {
 
   .introDescibe {
     width: 400px;
+    margin-top: 30px;
 
     span {
 
@@ -89,7 +87,7 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
-    flex: 1;
+    flex: 3;
 
 
     img {
