@@ -19,7 +19,7 @@
             </div>
           </el-col>
           <el-col :span="6" class="PC">
-            <div class="login">
+            <div class="login" v-if="!isphone">
               <div class="g_id_signin" id="g_id_signin"></div>
               <!--            <el-button class="sign" type="primary">{{ sign }}</el-button>-->
             </div>
@@ -46,7 +46,7 @@
               item.title
             }}</a>
         </div>
-        <div class="menuDiv">
+        <div class="menuDiv" v-if="isphone">
           <div class="g_id_signin" id="g_id_signin"></div>
         </div>
       </div>
@@ -68,6 +68,7 @@ export default {
         {title: "Start From Today", url: "#tryItNow"},
         {title: "Premium", url: "#pricing"}
       ],
+      isphone: isMobileDevice(),
       showMenu: false,
       headerActive: false,
       GOOGLE_CLIENT_ID: "42950959280-v3k7onnpje9prf59vv6h583mpodcnqvd.apps.googleusercontent.com"
@@ -75,7 +76,6 @@ export default {
   },
   created() {
     // 使用谷歌登录的api
-    console.log(isMobileDevice())
     let GOOGLE_CLIENT_ID = this.GOOGLE_CLIENT_ID;
     window.addEventListener('load', () => {
       window.google.accounts.id.initialize({

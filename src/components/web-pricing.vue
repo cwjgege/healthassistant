@@ -9,11 +9,21 @@
           <div class="smallTextColor" v-html="describe">
 
           </div>
+          <div class="smallTextColor" style="font-weight: 600;color: #47954c">
+            Submit your Email here!
+            <br/>
+            <br/>
+            Once the Aivocado App hits the scene, we've got a special treat for you!
+            <br/>
+            <br/>
+            a one-month Premium membership,
+            entirely on us!
+          </div>
           <div class="inputEmail">
             <div class="smallTextColor">Email:</div>
             <div class="_inputEmail">
-              <input type="text" v-model="email">
-              <button class="send" @click="submitEmail">Subscribe</button>
+              <input type="text" v-model="email" placeholder="name@example.com">
+              <button class="send" @click="submitEmail">Submit</button>
             </div>
 
           </div>
@@ -22,25 +32,51 @@
       <div class="pricingFree">
         <div class="pricingContent two">
           <div class="bigbigTextColor">
-            Basic
+            Free Plan
           </div>
+          <div class="detailedCharges" style="opacity: 1">
+            $ 0<span>/month</span>
+            <span style="opacity: 0;"> (58% OFF) </span>
+
+          </div>
+
+          <div class="smallTextColor" style="font-weight: 600;font-size: 20px;opacity: 0">
+            <span>Compare to</span> 9.99<span>/mo</span>
+          </div>
+          <!--          <div class="detailedCharges">-->
+          <!--            Free-->
+          <!--          </div>-->
+
+
           <div class="smallTextColor">
-            Best value for small businesses & freelancers
-          </div>
-          <div class="detailedCharges">
-            Free
+            <el-icon>
+              <CircleCheckFilled/>
+            </el-icon>
+            Limited Food Image Recognition, 2 image/day
           </div>
           <div class="smallTextColor">
             <el-icon>
               <CircleCheckFilled/>
             </el-icon>
-            Limited Food Image Recognition, 2/day
+            AI generated recipes
+          </div>
+          <div class="smallTextColor">
+            <el-icon>
+              <CircleCheckFilled/>
+            </el-icon>
+            Tailored Diet Advice
           </div>
           <div class="smallTextColor">
             <el-icon>
               <CircleCloseFilled/>
             </el-icon>
-            Long-term Health Tracking
+            AI Diet Assistant
+          </div>
+          <div class="smallTextColor">
+            <el-icon>
+              <CircleCloseFilled/>
+            </el-icon>
+            Long-term Diet Tracking
           </div>
           <div class="smallTextColor">
             <el-icon>
@@ -55,38 +91,28 @@
         <div class="pricingContent three">
           <div></div>
           <div class="bigbigTextColor">
-            Premium
+            Premium Plan
           </div>
-          <div class="smallTextColor">
-            Best value for small businesses & freelancers
-          </div>
+          <!--          <div class="smallTextColor">-->
+          <!--            <br/>-->
+          <!--            <br/>-->
+          <!--          </div>-->
 
           <div class="detailedCharges">
+
             $ 49.99<span>/yr</span>
             <span> (58% OFF) </span>
 
           </div>
 
           <div class="smallTextColor" style="font-weight: 600;font-size: 20px">
-            <span>Compare to</span> 9.99<span>/mo</span>
+            <span>Compared to</span> $9.99<span>/mo</span>
           </div>
           <div class="smallTextColor">
             <el-icon>
               <CircleCheckFilled/>
             </el-icon>
             Unlimited Food Image Recognition
-          </div>
-          <div class="smallTextColor">
-            <el-icon>
-              <CircleCheckFilled/>
-            </el-icon>
-            Long-term Health Tracking
-          </div>
-          <div class="smallTextColor">
-            <el-icon>
-              <CircleCheckFilled/>
-            </el-icon>
-            Weekly Health Report
           </div>
           <div class="smallTextColor">
             <el-icon>
@@ -100,7 +126,24 @@
             </el-icon>
             Tailored Diet Advice
           </div>
-
+          <div class="smallTextColor">
+            <el-icon>
+              <CircleCheckFilled/>
+            </el-icon>
+            AI Diet Assistant
+          </div>
+          <div class="smallTextColor">
+            <el-icon>
+              <CircleCheckFilled/>
+            </el-icon>
+            Long-term Diet Tracking
+          </div>
+          <div class="smallTextColor">
+            <el-icon>
+              <CircleCheckFilled/>
+            </el-icon>
+            Weekly Health Report
+          </div>
         </div>
       </div>
     </div>
@@ -116,7 +159,7 @@ export default {
   data() {
     return {
       title: "Premium",
-      describe: "Upgrade to Premium for an ad-free experience with exclusive, powerful AI features. <br /><br/>Try it free for 7 days, and you can cancel anytime.",
+      describe: "Upgrade to Premium for an ad-free experience with exclusive, powerful AI features. <br />",
       email: ''
     }
   },
@@ -156,6 +199,10 @@ export default {
 </script>
 
 <style scoped lang="less">
+.send {
+  background: #47944c !important;
+}
+
 ._inputEmail {
   margin-top: 10px;
   width: 100%;
@@ -166,9 +213,10 @@ export default {
   input {
     outline: none;
     width: calc(100% - 120px);
-    height: 28px;
+    height: 30px;
     border: none;
     padding: 0px 10px;
+    font-size: 12px;
   }
 
   button {
